@@ -239,6 +239,7 @@ namespace Pastel::Math
         {
             Vec2 line_dir = line_end - line_start;
             Vec2 point_dir = *this - line_start;
+
             return point_dir.Cross(line_dir) / line_dir.Magnitude();
         }
     };

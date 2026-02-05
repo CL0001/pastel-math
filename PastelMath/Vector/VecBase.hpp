@@ -22,10 +22,10 @@
  * - Dimension-specific explanations are deferred to derived types
  */
 
-#include <algorithm>
 #include <cmath>
 #include <cstddef>
 
+#include <algorithm>
 #include <concepts>
 #include <type_traits>
 
@@ -340,20 +340,20 @@ namespace Pastel::Math
              */
             [[nodiscard]] VecBase Refract(const VecBase& normal, T eta) const noexcept
             {
-                T cosI = -Dot(normal);
-                T sinT2 = eta * eta * (T(1) - cosI * cosI);
+                T cos_i = -Dot(normal);
+                T sin_t2 = eta * eta * (T(1) - cos_i * cos_i);
 
-                if (sinT2 > T(1))
+                if (sin_t2 > T(1))
                 {
                     return VecBase{};
                 }
 
-                T cosT = std::sqrt(T(1) - sinT2);
+                T cos_t = std::sqrt(T(1) - sin_t2);
                 VecBase result;
 
                 for (std::size_t i = 0; i < N; ++i)
                 {
-                    result.data[i] = eta * data[i] + (eta * cosI - cosT) * normal.data[i];
+                    result.data[i] = eta * data[i] + (eta * cos_i - cos_t) * normal.data[i];
                 }
 
                 return result;
@@ -418,6 +418,7 @@ namespace Pastel::Math
                         return false;
                     }
                 }
+
                 return true;
             }
 
@@ -568,26 +569,26 @@ namespace Pastel::Math
 
             [[nodiscard]] constexpr T MinComponent() const noexcept
             {
-                T minVal = data[0];
+                T min_val = data[0];
 
                 for (std::size_t i = 1; i < N; ++i)
                 {
-                    minVal = std::min(minVal, data[i]);
+                    min_val = std::min(min_val, data[i]);
                 }
 
-                return minVal;
+                return min_val;
             }
 
             [[nodiscard]] constexpr T MaxComponent() const noexcept
             {
-                T maxVal = data[0];
+                T max_val = data[0];
 
                 for (std::size_t i = 1; i < N; ++i)
                 {
-                    maxVal = std::max(maxVal, data[i]);
+                    max_val = std::max(max_val, data[i]);
                 }
                 
-                return maxVal;
+                return max_val;
             }
         };
 
